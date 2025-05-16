@@ -2,50 +2,309 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Md Sherazum Munir</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Writings - MD SHERAZUM MUNIR</title>
   <style>
+    :root {
+      --bg-light: #faf4e3;
+      --bg-dark: #1e1e1e;
+      --text-light: #333;
+      --text-dark: #f5f5f5;
+      --section-light: #fff8e1;
+      --section-dark: #2e2e2e;
+      --post-light: #f4e7c4;
+      --post-dark: #3a3a3a;
+      --primary: #a0522d;
+      --hover: #8b3f15;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
     body {
-      background-color: #111;
-      color: #00ffcc;
-      font-family: 'Courier New', monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 900px;
+      margin: auto;
+      background: var(--bg-light);
       padding: 20px;
+      color: var(--text-light);
+      transition: all 0.5s ease;
+    }
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    header {
       text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #d4b483;
     }
-    #text {
-      font-size: 20px;
-      white-space: pre-wrap;
-      border-right: 2px solid #00ffcc;
-      padding-right: 5px;
-      animation: blink 0.8s step-end infinite;
+    header img {
+      width: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
     }
-    @keyframes blink {
-      50% {
-        border-color: transparent;
-      }
+    header h1 {
+      color: #8b4513;
+      margin-bottom: 5px;
+      font-size: 2.5rem;
+    }
+    header p {
+      color: #6b3e15;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    nav {
+      text-align: center;
+      margin: 20px 0;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .toggle-dark {
+      display: block;
+      margin: 20px auto;
+      padding: 8px 16px;
+      background: #444;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    section {
+      background: var(--section-light);
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+    }
+    body.dark section {
+      background: var(--section-dark);
+    }
+    section h2 {
+      color: #8b4513;
+      margin-bottom: 15px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      transition: 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 5px var(--primary);
+    }
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: var(--hover);
+    }
+    .post {
+      background: var(--post-light);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      white-space: pre-line;
+      position: relative;
+      transition: 0.3s ease;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    body.dark .post {
+      background: var(--post-dark);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .post h3 {
+      margin-bottom: 8px;
+      color: #6e3b0c;
+    }
+    .delete-btn, .edit-btn {
+      position: absolute;
+      top: 10px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .edit-btn {
+      right: 70px;
+      background: #007bff;
+      color: white;
+    }
+    .delete-btn {
+      right: 10px;
+      background: #dc3545;
+      color: white;
+    }
+    .search-box {
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-  <div id="text"></div>
+  <header>
+    <img src="logo.png" alt="Logo" />
+    <h1>My Writings</h1>
+    <p>Maintained by: MD SHERAZUM MUNIR</p>
+  </header>
+
+  <button class="toggle-dark" onclick="document.body.classList.toggle('dark')">Toggle Dark Mode</button>
+
+  <nav>
+    <a href="#poems">Poems</a>
+    <a href="#stories">Stories</a>
+    <a href="#upload">Upload</a>
+    <a href="#passwordChange">Change Password</a>
+  </nav>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search by title or content...">
+  </div>
+
+  <section id="poems">
+    <h2>Poems</h2>
+    <div id="kobitaPosts"></div>
+  </section>
+
+  <section id="stories">
+    <h2>Stories</h2>
+    <div id="golpoPosts"></div>
+  </section>
+
+  <section id="upload">
+    <h2>Upload Your Writing</h2>
+    <form id="uploadForm">
+      <input type="password" id="password" placeholder="Enter secret password" required />
+      <input type="text" id="title" placeholder="Enter title" required />
+      <select id="category" required>
+        <option value="">-- Select Category --</option>
+        <option value="kobita">Poem</option>
+        <option value="golpo">Story</option>
+      </select>
+      <textarea id="content" placeholder="Write your content here..." required></textarea>
+      <button type="submit">Upload</button>
+    </form>
+  </section>
+
+  <section id="passwordChange">
+    <h2>Change Password</h2>
+    <form id="passwordChangeForm">
+      <input type="password" id="oldPassword" placeholder="Enter old password" required />
+      <input type="password" id="newPassword" placeholder="Enter new password" required />
+      <input type="password" id="confirmNewPassword" placeholder="Confirm new password" required />
+      <button type="submit">Change Password</button>
+    </form>
+  </section>
 
   <script>
-    const message = "It's me Md Sherazum Munir and I am the one who is seeking for becoming a Billionaire and now I will do it. One just thing—my mom does not want to go with me in foreign.";
-    let i = 0;
+    let correctPassword = localStorage.getItem('sitePassword') || "sh3r@z123";
 
-    function typeWriter() {
-      if (i < message.length) {
-        document.getElementById("text").innerHTML += message.charAt(i);
-        i++;
-        setTimeout(typeWriter, 50); // typing speed
-      }
+    const form = document.getElementById('uploadForm');
+    const kobitaPosts = document.getElementById('kobitaPosts');
+    const golpoPosts = document.getElementById('golpoPosts');
+
+    function savePosts() {
+      localStorage.setItem('kobitaPosts', kobitaPosts.innerHTML);
+      localStorage.setItem('golpoPosts', golpoPosts.innerHTML);
     }
 
-    typeWriter();
+    function loadPosts() {
+      kobitaPosts.innerHTML = localStorage.getItem('kobitaPosts') || '';
+      golpoPosts.innerHTML = localStorage.getItem('golpoPosts') || '';
+      attachDeleteHandlers();
+    }
+
+    function attachDeleteHandlers() {
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.onclick = function () {
+          this.parentElement.remove();
+          savePosts();
+        };
+      });
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const password = document.getElementById('password').value.trim();
+      const title = document.getElementById('title').value.trim();
+      const category = document.getElementById('category').value;
+      const content = document.getElementById('content').value.trim();
+
+      if (password !== correctPassword) {
+        alert('Wrong password! You are not authorized to post.');
+        return;
+      }
+
+      const postDiv = document.createElement('div');
+      postDiv.classList.add('post');
+      postDiv.innerHTML = `<h3>${title}</h3><p>${content}</p><button class="delete-btn">Delete</button>`;
+
+      if (category === 'kobita') {
+        kobitaPosts.appendChild(postDiv);
+      } else {
+        golpoPosts.appendChild(postDiv);
+      }
+
+      savePosts();
+      attachDeleteHandlers();
+      form.reset();
+    });
+
+    document.getElementById('passwordChangeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const oldPass = document.getElementById('oldPassword').value.trim();
+      const newPass = document.getElementById('newPassword').value.trim();
+      const confirmPass = document.getElementById('confirmNewPassword').value.trim();
+
+      if (oldPass !== correctPassword) {
+        alert("Old password is incorrect.");
+        return;
+      }
+
+      if (newPass !== confirmPass) {
+        alert("New passwords do not match.");
+        return;
+      }
+
+      localStorage.setItem('sitePassword', newPass);
+      correctPassword = newPass;
+      alert("Password changed successfully!");
+      this.reset();
+    });
+
+    document.getElementById('searchInput').addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      document.querySelectorAll('.post').forEach(post => {
+        const title = post.querySelector('h3').innerText.toLowerCase();
+        const content = post.querySelector('p').innerText.toLowerCase();
+        post.style.display = (title.includes(query) || content.includes(query)) ? 'block' : 'none';
+      });
+    });
+
+    window.onload = loadPosts;
   </script>
 </body>
 </html>
